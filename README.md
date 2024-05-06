@@ -35,7 +35,7 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 - Open the generated Excel file to view the processed data and recommendations.
 
 ## Building the App
-For ARM Build run `pyinstaller process_spreadsheet.py -N PolicyTool_ARM -F --argv-emulation ` in the Terminal to build the app.
+For ARM Build run `pyinstaller process_spreadsheet.py --name PolicyTool_ARM -F --argv-emulation ` in the Terminal to build the app.
 
 For Intel Build run `python3 -m pyinstaller process_spreadsheet.py --name PolicyTool_INTEL -F --argv-emulation`
 * Arguments:
