@@ -13,7 +13,7 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 
 1. **Install Python:** Make sure you have Python 3.x installed on your system. If not, you can download it from [python.org](https://www.python.org/downloads/).
 
-2. **Install Required Libraries:** Open a terminal or command prompt and install the required libraries using pip: `pip install pandas beautifulsoup4`
+2. **Install Required Libraries:** Open a terminal or command prompt and install the required libraries using pip: `pip3 install -r requirments.txt`
 
 3. **Download the Repository:** Download or clone the repository to your local machine.
 
@@ -38,7 +38,7 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 For ARM Build run `pyinstaller process_spreadsheet.py --name PolicyTool_ARM -F --argv-emulation ` in the Terminal to build the app.
 
 For Intel Build run `python3 -m PyInstaller process_spreadsheet.py --name PolicyTool_INTEL -F --argv-emulation` in the Terminal to build the app.
-* 
+
 * Arguments:
   * `--argv-emulation`: Enable argv emulation for macOS app bundles. If enabled, the initial open document/URL event is processed by the bootloader and the passed file paths or URLs are appended to sys.argv.
   * `-n NAME, --name NAME`: Name to assign to the bundled app and spec file (default: first script’s basename)
