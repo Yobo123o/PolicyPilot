@@ -1,12 +1,9 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog
 import pandas as pd
-import warnings
 from bs4 import BeautifulSoup
 import os
-
 import warnings
-from bs4 import BeautifulSoup
 
 
 def clean_html(html_content):
@@ -68,15 +65,15 @@ class DataProcessorApp:
             processed_data = pd.read_excel(self.input_file_path, header=header_row)
             processed_data.columns = [col.lower() for col in processed_data.columns]
 
-            #DEBUG:
-            #print("Columns after setting header dynamically and converting to lower case:", processed_data.columns)
+            # DEBUG:
+            # print("Columns after setting header dynamically and converting to lower case:", processed_data.columns)
 
             # Load OPSS chart data, assuming the headers are correctly set
             opss_chart = pd.read_excel(self.opss_file_path, header=0)
             opss_chart.columns = [col.lower() for col in opss_chart.columns]
 
-            #DEBUG:
-            #print("OPSS chart columns after setting header:", opss_chart.columns)
+            # DEBUG:
+            # print("OPSS chart columns after setting header:", opss_chart.columns)
 
             # Rename 'number' column to 'code' before any operations that use 'code'
             if 'number' in processed_data.columns:
@@ -138,7 +135,8 @@ class DataProcessorApp:
                 # Save the final data to an Excel file with the user-defined name
                 processed_data.to_excel(output_file_path, index=False)
                 messagebox.showinfo("Success",
-                                    f"Data processed and recommendations added successfully. File saved to '{output_file_path}'.")
+                                    f'Data processed and recommendations added successfully. '
+                                    f'File saved to \'{output_file_path}\'.')
             else:
                 messagebox.showwarning("Cancelled", "File save name was not provided. The process was cancelled.")
 
@@ -148,7 +146,6 @@ class DataProcessorApp:
 
 def main():
     root = tk.Tk()
-    app = DataProcessorApp(root)
     root.mainloop()
 
 
