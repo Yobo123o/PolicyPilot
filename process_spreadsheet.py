@@ -146,6 +146,7 @@ class DataProcessorApp:
 
 def main():
     root = tk.Tk()
+    app = DataProcessorApp(root)  # Instantiate your GUI application
     root.mainloop()
 
 
