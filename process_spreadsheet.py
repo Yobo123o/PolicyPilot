@@ -1,15 +1,31 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog
 import pandas as pd
+import warnings
 from bs4 import BeautifulSoup
 import os
 
+import warnings
+from bs4 import BeautifulSoup
+
 
 def clean_html(html_content):
-    # Use BeautifulSoup to remove HTML tags effectively
-    soup = BeautifulSoup(html_content, "html.parser")
+    # Check if html_content is a filename
+    if os.path.exists(html_content):
+        # Open the file and pass the file handle to BeautifulSoup
+        with open(html_content, 'r', encoding='utf-8') as file:
+            soup = BeautifulSoup(file, "html.parser")
+    else:
+        # Assume html_content is already HTML markup and pass it directly to BeautifulSoup
+        soup = BeautifulSoup(html_content, "html.parser")
+
+    # Extract text from the BeautifulSoup object
     cleaned_text = soup.get_text()
     cleaned_text = cleaned_text.replace('&nbsp;', ' ')  # Replace '&nbsp;' with a space
+
+    # Suppress MarkupResemblesLocatorWarning
+    warnings.simplefilter("ignore", category=UserWarning)
+
     return cleaned_text
 
 
@@ -51,12 +67,16 @@ class DataProcessorApp:
             header_row = raw_data.dropna(how='all', axis=0).index[0]
             processed_data = pd.read_excel(self.input_file_path, header=header_row)
             processed_data.columns = [col.lower() for col in processed_data.columns]
-            print("Columns after setting header dynamically and converting to lower case:", processed_data.columns)
+
+            #DEBUG:
+            #print("Columns after setting header dynamically and converting to lower case:", processed_data.columns)
 
             # Load OPSS chart data, assuming the headers are correctly set
             opss_chart = pd.read_excel(self.opss_file_path, header=0)
             opss_chart.columns = [col.lower() for col in opss_chart.columns]
-            print("OPSS chart columns after setting header:", opss_chart.columns)
+
+            #DEBUG:
+            #print("OPSS chart columns after setting header:", opss_chart.columns)
 
             # Rename 'number' column to 'code' before any operations that use 'code'
             if 'number' in processed_data.columns:
@@ -71,14 +91,15 @@ class DataProcessorApp:
 
             # Convert potential float or NaN values in other columns to string if necessary
             text_columns = ['department of education', 'state board', 'state superintendent',
-                                'superintendent of public instruction']
+                            'superintendent of public instruction']
             for col in text_columns:
                 if col in processed_data.columns:
-                        processed_data[col] = processed_data[col].fillna('').apply(lambda x: str(x).replace('N', ''))
+                    processed_data[col] = processed_data[col].fillna('').apply(lambda x: str(x).replace('N', ''))
 
             # Drop 'section' and 'status' columns from processed data as not needed
             if 'section' in processed_data.columns or 'status' in processed_data.columns:
-                processed_data.drop(['unnamed: 0', 'section', 'status', 'helper column','unnamed: 10'], axis=1, inplace=True, errors='ignore')
+                processed_data.drop(['unnamed: 0', 'section', 'status', 'helper column', 'unnamed: 10'], axis=1,
+                                    inplace=True, errors='ignore')
 
             # Clean HTML from public_body column if it exists
             if 'public_body' in processed_data.columns:
