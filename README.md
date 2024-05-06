@@ -19,7 +19,6 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 
 4. **Run the Program:** Navigate to the directory containing the script files and run the main script: `process_spreadsheet.py`
 
-
 5. **Select Input Files:**
 - Click on the "Browse" button next to "Select the Input Excel File" to choose your input Excel file containing policy data.
 - Click on the "Browse" button next to "Select the OPSS Chart File" to choose the OPSS chart Excel file.
@@ -34,6 +33,13 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 
 8. **Explore Recommendations:**
 - Open the generated Excel file to view the processed data and recommendations.
+
+## Building the App
+ Run `pyinstaller process_spreadsheet.py -N PolicyTool_[INTEL|ARM] -F --argv-emulation ` in the Terminal to build the app.
+* Arguments:
+  * `--argv-emulation`: Enable argv emulation for macOS app bundles. If enabled, the initial open document/URL event is processed by the bootloader and the passed file paths or URLs are appended to sys.argv.
+  * `-n NAME, --name NAME`: Name to assign to the bundled app and spec file (default: first script’s basename)
+  * `-F, --onefile` : Create a one-file bundled executable.
 
 ## Support
 
