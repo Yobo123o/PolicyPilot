@@ -1,4 +1,4 @@
-('/Users/bswartz/PycharmProjects/policyTool/.venv/bin/build/process_spreadsheet/PYZ-00.pyz',
+('/Users/bswartz/PycharmProjects/policyTool/build/process_spreadsheet/PYZ-00.pyz',
  [('__future__',
    '/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/__future__.py',
    'PYMODULE'),
