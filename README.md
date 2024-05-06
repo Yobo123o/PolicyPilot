@@ -37,7 +37,7 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 ## Building the App
 For ARM Build run `pyinstaller process_spreadsheet.py -N PolicyTool_ARM -F --argv-emulation ` in the Terminal to build the app.
 
-For Intel Build run `python3 -m pyinstaller process_spreadsheet.py -N PolicyTool_INTEL -F --argv-emulation`
+For Intel Build run `python3 -m pyinstaller process_spreadsheet.py --name PolicyTool_INTEL -F --argv-emulation`
 * Arguments:
   * `--argv-emulation`: Enable argv emulation for macOS app bundles. If enabled, the initial open document/URL event is processed by the bootloader and the passed file paths or URLs are appended to sys.argv.
   * `-n NAME, --name NAME`: Name to assign to the bundled app and spec file (default: first script’s basename)
