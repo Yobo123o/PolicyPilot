@@ -1,7 +1,7 @@
 import os
 import re
 import tkinter as tk
-from tkinter import filedialog, messagebox, simpledialog
+from tkinter import filedialog, messagebox
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -113,19 +113,19 @@ class DataProcessorApp:
             opss_dict = opss_chart.set_index('code')['recommendation'].to_dict()
             processed_data['recommendation'] = processed_data['code'].apply(lambda x: opss_dict.get(x, "REVIEW"))
 
-            # Prompt user for output file name
-            output_file_name = simpledialog.askstring("Output File Name", "Enter the output file save name:",
-                                                      parent=self.root)
-            if output_file_name:
-                if not output_file_name.endswith('.xlsx'):
-                    output_file_name += '.xlsx'
-                output_file_path = os.path.join(os.path.expanduser('~'), 'Documents', output_file_name)
+            # Use the OS built-in save dialog to choose the file save location and name
+            file_options = {
+                'defaultextension': '.xlsx',
+                'filetypes': [('Excel files', '*.xlsx'), ('All files', '*.*')],
+                'initialdir': os.path.expanduser('~'),  # Starting directory for dialog
+                'title': 'Save processed file'
+            }
+            output_file_path = filedialog.asksaveasfilename(**file_options)
+            if output_file_path:
                 processed_data.to_excel(output_file_path, index=False)
-                messagebox.showinfo("Success",
-                                    f'Data processed and recommendations added successfully. '
-                                    f'File saved to "{output_file_path}".')
+                messagebox.showinfo("Success", f"Data processed successfully and saved to {output_file_path}.")
             else:
-                messagebox.showwarning("Cancelled", "File save name was not provided. The process was cancelled.")
+                messagebox.showwarning("Cancelled", "Save operation was cancelled.")
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
