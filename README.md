@@ -62,12 +62,12 @@ pyinstaller process_spreadsheet.py --name PolicyTool_ARM --onefile --argv-emulat
 ### Apple Intel Processors
 Intel Application Build:
 ```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation --noconsole
+python3 -m PyInstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation --noconsole
 ```
 
 Intel Unix Executable Build:
 ```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation
+python3 -m PyInstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation
 ```
 
 
