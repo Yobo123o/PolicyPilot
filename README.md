@@ -1,6 +1,6 @@
 # OSBA Policy Tool
 
-The OSBA Policy Tool is a Python application that processes Excel files to generate policy recommendations based on specified criteria. It requires Python 3.x and the following libraries: tkinter, pandas, bs4 (BeautifulSoup), and os.
+The OSBA Policy Tool is a Python application that processes Excel files to generate policy recommendations based on specified criteria. It requires Python 3.12.3 (or above) and the following libraries: tkinter, pandas, bs4 (BeautifulSoup), and os.
 
 ## Features
 
