@@ -1,6 +1,6 @@
-# OSBA Policy Tool
+# OSBA PolicyPilot
 
-The OSBA Policy Tool is a Python application that processes Excel files to generate policy recommendations based on specified criteria. It is designed for users interested in analyzing policy data efficiently.
+The PolicyPilot is a Python application that processes Excel files to generate policy recommendations based on specified criteria. It is designed for users interested in analyzing policy data efficiently.
 
 ## Features
 
@@ -50,36 +50,20 @@ These instructions will guide you through building a standalone executable for d
 ### Apple Silicon Processors
 ARM Application Build:
 ```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_ARM --onefile --argv-emulation --noconsole
+pyinstaller process_spreadsheet.py --name PolicyPilot_ARM --onefile --argv-emulation --noconsole
 ```
-
-ARM Unix Executable Build:
-```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_ARM --onefile --argv-emulation
-```
-
 
 ### Apple Intel Processors
 Intel Application Build:
 ```bash
-python3 -m PyInstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation --noconsole
-```
-
-Intel Unix Executable Build:
-```bash
-python3 -m PyInstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation
+python3 -m PyInstaller process_spreadsheet.py --name PolicyPilot_INTEL --onefile --argv-emulation --noconsole
 ```
 
 
 ### Windows Machines
 Windows Application Build:
 ```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_WIN --onefile --argv-emulation --noconsole
-```
-
-Windows Executable Build
-```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_WIN --onefile --argv-emulation --noconsole
+pyinstaller process_spreadsheet.py --name PolicyPilot_WIN --onefile --argv-emulation --noconsole
 ```
 
 ## Support
