@@ -36,7 +36,6 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 
 ## Building the App
 This will vary depending on the actual architecture of your machine. These commands exist to save you time typing out the arguments into the terminal. Use the appropriate command for your system. Pyinstaller will automatically configure for your system's architecture.
-This will vary depending on the actual architecture of your machine. These commands exist to save you time typing out the arguments into the terminal. Use the appropriate command for your system. Pyinstaller will automatically configure for your system's architecture.
 
 For ARM Build run `pyinstaller process_spreadsheet.py --name PolicyTool_ARM -F --argv-emulation ` in the Terminal to build the app.
 
