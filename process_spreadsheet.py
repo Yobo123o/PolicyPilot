@@ -1,11 +1,12 @@
-import tkinter as tk
-from tkinter import filedialog, messagebox, simpledialog
-import pandas as pd
-from bs4 import BeautifulSoup
 import os
 import re
-import warnings
+import tkinter as tk
+from tkinter import filedialog, messagebox, simpledialog
+
+import pandas as pd
+from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
+
 
 def clean_html(html_content):
     if os.path.exists(html_content):
@@ -34,6 +35,7 @@ def match_public_body(row, opss_chart):
     # Format the output to include the match status and the percentage
     match_status = "MATCH" if best_match_score >= 90 else "REVIEW"
     return f"{match_status} ({best_match_score}%)"
+
 
 class DataProcessorApp:
     def __init__(self, root):
@@ -95,7 +97,8 @@ class DataProcessorApp:
             opss_chart['public_body'] = opss_chart['public_body'].astype(str).apply(clean_html)
 
             # Apply fuzzy matching and capture the match confidence
-            processed_data['body match (%)'] = processed_data.apply(lambda row: match_public_body(row, opss_chart), axis=1)
+            processed_data['body match (%)'] = processed_data.apply(lambda row: match_public_body(row, opss_chart),
+                                                                    axis=1)
 
             # Columns to check for 'N' and subsequently clear 'N'
             education_columns = ['department of education', 'state board', 'state superintendent',
@@ -119,15 +122,19 @@ class DataProcessorApp:
                 output_file_path = os.path.join(os.path.expanduser('~'), 'Documents', output_file_name)
                 processed_data.to_excel(output_file_path, index=False)
                 messagebox.showinfo("Success",
-                                    f'Data processed and recommendations added successfully. File saved to "{output_file_path}".')
+                                    f'Data processed and recommendations added successfully. '
+                                    f'File saved to "{output_file_path}".')
             else:
                 messagebox.showwarning("Cancelled", "File save name was not provided. The process was cancelled.")
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {str(e)}")
+
+
 def main():
     root = tk.Tk()
-    app = DataProcessorApp(root)
+    app = DataProcessorApp(root)  # IGNORE WARN: Without this GUI will not build correctly.
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
