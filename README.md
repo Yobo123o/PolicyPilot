@@ -1,4 +1,4 @@
-# OSBA PolicyPilot
+# PolicyPilot
 
 The PolicyPilot is a Python application that processes Excel files to generate policy recommendations based on specified criteria. It is designed for users interested in analyzing policy data efficiently.
 
