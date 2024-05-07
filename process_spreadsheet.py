@@ -40,7 +40,7 @@ def match_public_body(row, opss_chart):
 class DataProcessorApp:
     def __init__(self, root):
         self.root = root
-        root.title('OSBA Policy Tool')
+        root.title('PolicyPilot')
         root.geometry("300x300")
 
         # Initialize file path attributes
