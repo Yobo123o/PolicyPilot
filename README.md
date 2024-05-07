@@ -30,7 +30,7 @@ pip3 install -r requirements.txt
 ```
 3. Get the Code: Clone the repository or download the source code:
 ```bash
-git clone https://github.com/Yobo123o/policyTool.git
+git clone https://github.com/Yobo123o/PolicyPilot.git
 cd policyTool
 ```
 ## Usage
