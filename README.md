@@ -19,14 +19,14 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 1. **Install Python:** Ensure Python 3.12.3 or newer is installed. [Download Python](https://www.python.org/downloads/)
 
 2. **Install Libraries:** Use pip to install the required libraries:
-   ```bash
-   pip3 install -r requirements.txt
-   ```
+```bash
+pip3 install -r requirements.txt
+```
 3. Get the Code: Clone the repository or download the source code:
-   ```bash
-   git clone https://github.com/Yobo123o/policyTool.git
-   cd policyTool
-   ```
+```bash
+git clone https://github.com/Yobo123o/policyTool.git
+cd policyTool
+```
 ## Usage
 1. Run the Program: Execute the script to start the application:
 ```bash
