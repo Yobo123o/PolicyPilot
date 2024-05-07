@@ -43,29 +43,46 @@ class DataProcessorApp:
         root.title('OSBA Policy Tool')
         root.geometry("300x300")
 
-        tk.Label(root, text="Select the Input Excel File:").pack()
-        tk.Button(root, text="Browse", command=self.load_input_file).pack()
-        tk.Label(root, text="Select the OPSS Chart File:").pack()
-        tk.Button(root, text="Browse", command=self.load_opss_file).pack()
-        tk.Button(root, text="Process Data", command=self.process_data).pack()
-
-        self.progress = ttk.Progressbar(root, orient="horizontal",
-                                        length=200, mode="determinate")
-        self.progress.pack(pady=20)
-
+        # Initialize file path attributes
         self.input_file_path = None
         self.opss_file_path = None
 
+        # Label for the input Excel file
+        tk.Label(root, text="Select the Input Excel File:").pack()
+        self.input_file_label = tk.Label(root, text="No file selected")
+        self.input_file_label.pack()
+        tk.Button(root, text="Browse", command=self.load_input_file).pack()
+
+        # Label for the OPSS Chart file
+        tk.Label(root, text="Select the OPSS Chart File:").pack()
+        self.opss_file_label = tk.Label(root, text="No file selected")
+        self.opss_file_label.pack()
+        tk.Button(root, text="Browse", command=self.load_opss_file).pack()
+
+        tk.Button(root, text="Process Data", command=self.process_data).pack()
+        self.progress = ttk.Progressbar(root, orient="horizontal", length=200, mode="determinate")
+        self.progress.pack(pady=20)
+
     def load_input_file(self):
-        self.input_file_path = filedialog.askopenfilename()
+        file_path = filedialog.askopenfilename(filetypes=(("Excel files", "*.xls *.xlsx *.xlsm"), ("All files", "*.*")))
+        if file_path:
+            self.input_file_path = file_path  # Save the file path
+            self.input_file_label.config(text=os.path.basename(file_path))
+        else:
+            self.input_file_label.config(text="No file selected")
 
     def load_opss_file(self):
-        self.opss_file_path = filedialog.askopenfilename()
+        file_path = filedialog.askopenfilename(filetypes=(("Excel files", "*.xls *.xlsx *.xlsm"), ("All files", "*.*")))
+        if file_path:
+            self.opss_file_path = file_path  # Save the file path
+            self.opss_file_label.config(text=os.path.basename(file_path))
+        else:
+            self.opss_file_label.config(text="No file selected")
 
     def process_data(self):
+        # Check if both files are selected before processing
         if not self.input_file_path or not self.opss_file_path:
-            messagebox.showwarning("File Not Selected",
-                                   "Please select both the input and OPSS chart files before processing.")
+            messagebox.showwarning("Warning", "Please select both files before processing.")
             return
         threading.Thread(target=self.actual_data_processing).start()
 
