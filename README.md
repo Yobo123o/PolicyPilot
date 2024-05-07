@@ -47,18 +47,41 @@ python process_spreadsheet.py
 ## Building the App
 These instructions will guide you through building a standalone executable for different architectures:
 
-ARM Build:
+### Apple Silicon Processors
+ARM Application Build:
 ```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_ARM -F --argv-emulation
+pyinstaller process_spreadsheet.py --name PolicyTool_ARM --onefile --argv-emulation --noconsole
 ```
-Intel Build:
+
+ARM Unix Executable Build:
 ```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_INTEL -F --argv-emulation
+pyinstaller process_spreadsheet.py --name PolicyTool_ARM --onefile --argv-emulation
 ```
-Windows Build:
+
+
+### Apple Intel Processors
+Intel Application Build:
 ```bash
-pyinstaller process_spreadsheet.py --name PolicyTool_WIN -F --argv-emulation
+pyinstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation --noconsole
 ```
+
+Intel Unix Executable Build:
+```bash
+pyinstaller process_spreadsheet.py --name PolicyTool_INTEL --onefile --argv-emulation
+```
+
+
+### Windows Machines
+Windows Application Build:
+```bash
+pyinstaller process_spreadsheet.py --name PolicyTool_WIN --onefile --argv-emulation --noconsole
+```
+
+Windows Executable Build
+```bash
+pyinstaller process_spreadsheet.py --name PolicyTool_WIN --onefile --argv-emulation --noconsole
+```
+
 ## Support
 For assistance, please open an issue in the GitHub repository or contact Brendan Swartz at bswartz@ohioschoolboards.org.
 
