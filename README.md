@@ -14,6 +14,12 @@ The OSBA Policy Tool is a Python application that processes Excel files to gener
 - **Data Processing:** Adds recommendations to the input data based on criteria defined within the OPSS chart.
 - **Results Output:** Outputs the processed data with recommendations into a new Excel file.
 
+## Download
+
+You can download the latest compiled version of the Policy Tool here:
+
+[Download OSBA Policy Tool v0.5.0](https://github.com/Yobo123o/policyTool/releases/tag/v0.5.0)
+
 ## Installation
 
 1. **Install Python:** Ensure Python 3.12.3 or newer is installed. [Download Python](https://www.python.org/downloads/)
