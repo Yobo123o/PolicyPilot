@@ -13,7 +13,7 @@ The PolicyPilot is a Python application that processes Excel files to generate p
 
 You can download the latest compiled version of the Policy Tool here:
 
-[Download OSBA Policy Tool v0.5.0](https://github.com/Yobo123o/policyTool/releases/tag/v0.5.0)
+[Download PolicyPilot](https://github.com/Yobo123o/PolicyPilot/releases)
 
 ## Prerequisites
 
