@@ -39,6 +39,8 @@ For ARM Build run `pyinstaller process_spreadsheet.py --name PolicyTool_ARM -F -
 
 For Intel Build run `python3 -m PyInstaller process_spreadsheet.py --name PolicyTool_INTEL -F --argv-emulation` in the Terminal to build the app.
 
+For Windows Build run `pyinstaller process_spreadsheet.py --name PolicyTool_WIN -F --argv-emulation` in the Terminal to build the app.
+
 * Arguments:
   * `--argv-emulation`: Enable argv emulation for macOS app bundles. If enabled, the initial open document/URL event is processed by the bootloader and the passed file paths or URLs are appended to sys.argv.
   * `-n NAME, --name NAME`: Name to assign to the bundled app and spec file (default: first script’s basename)
