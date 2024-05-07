@@ -36,7 +36,7 @@ cd policyTool
 ## Usage
 1. Run the Program: Execute the script to start the application:
 ```bash
-python process_spreadsheet.py
+python3 process_spreadsheet.py
 ```
 2. File Selection: Use the "Browse" buttons to select both the input Excel file and the OPSS chart file. 
 
