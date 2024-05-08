@@ -25,17 +25,17 @@ You can download the latest compiled version of the Policy Tool here:
 1. **Install Python:** Ensure Python 3.12.3 or newer is installed. [Download Python](https://www.python.org/downloads/)
 
 2. **Install Libraries:** Use pip to install the required libraries:
-```bash
+```
 pip3 install -r requirements.txt
 ```
 3. Get the Code: Clone the repository or download the source code:
-```bash
+```
 git clone https://github.com/Yobo123o/PolicyPilot.git
 cd policyTool
 ```
 ## Usage
 1. Run the Program: Execute the script to start the application:
-```bash
+```
 python3 process_spreadsheet.py
 ```
 2. File Selection: Use the "Browse" buttons to select both the input Excel file and the OPSS chart file. 
@@ -49,20 +49,20 @@ These instructions will guide you through building a standalone executable for d
 
 ### Apple Silicon Processors
 ARM Application Build:
-```bash
+```
 pyinstaller process_spreadsheet.py --name PolicyPilot_ARM --onefile --argv-emulation --noconsole
 ```
 
 ### Apple Intel Processors
 Intel Application Build:
-```bash
+```
 python3 -m PyInstaller process_spreadsheet.py --name PolicyPilot_INTEL --onefile --argv-emulation --noconsole
 ```
 
 
 ### Windows Machines
 Windows Application Build:
-```bash
+```
 pyinstaller process_spreadsheet.py --name PolicyPilot_WIN --onefile --argv-emulation --noconsole
 ```
 
