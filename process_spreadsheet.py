@@ -4,6 +4,10 @@ import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
+import openpyxl
+from openpyxl.styles import Alignment
+from openpyxl.utils import get_column_letter
+
 import pandas as pd
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
@@ -112,22 +116,34 @@ class DataProcessorApp:
             opss_chart['public_body'] = opss_chart['public_body'].astype(str).apply(clean_html)
             self.root.after(0, lambda: self.update_progress(50))  # Update progress
 
-            # Step 4: Check for 'N' and clear them
+            # Step 4: Process exact matches for 'ODE' and 'SBOE', skip if public_body is blank
+            def update_columns(row):
+                if row['public_body'] and 'ODE' in row['public_body']:
+                    row['department of education'] = 'ODE'
+                if row['public_body'] and 'SBOE' in row['public_body']:
+                    row['state board'] = 'SBOE'
+                return row
+
+            processed_data = processed_data.apply(update_columns, axis=1)
+
+            # Step 5: Apply fuzzy matching and process recommendations
+            processed_data['body match (%)'] = processed_data.apply(lambda row: match_public_body(row, opss_chart),
+                                                                    axis=1)
+            self.root.after(0, lambda: self.update_progress(80))  # Update progress
+
+            opss_dict = opss_chart.set_index('code')['recommendation'].to_dict()
+            processed_data['recommendation'] = processed_data['code'].apply(lambda x: opss_dict.get(x, "REVIEW"))
+
+            # Step 6: Remove rows with 'N' in all specified education columns
             education_columns = ['department of education', 'state board', 'state superintendent',
                                  'superintendent of public instruction']
             processed_data = processed_data[~(processed_data[education_columns] == 'N').all(axis=1)]
             for col in education_columns:
                 processed_data[col] = processed_data[col].replace('N', '')
-            self.root.after(0, lambda: self.update_progress(65))  # Update progress
 
-            # Step 5: Apply fuzzy matching
-            processed_data['body match (%)'] = processed_data.apply(lambda row: match_public_body(row, opss_chart),
-                                                                    axis=1)
-            self.root.after(0, lambda: self.update_progress(80))  # Update progress
+            # Drop public body column after all processing is done
+            processed_data.drop('public_body', axis=1, inplace=True)
 
-            # Step 6: Process recommendations
-            opss_dict = opss_chart.set_index('code')['recommendation'].to_dict()
-            processed_data['recommendation'] = processed_data['code'].apply(lambda x: opss_dict.get(x, "REVIEW"))
             self.root.after(0, lambda: self.update_progress(95))  # Update progress
 
             # Final processing steps...
@@ -152,7 +168,28 @@ class DataProcessorApp:
         }
         output_file_path = filedialog.asksaveasfilename(**file_options)
         if output_file_path:
+            # Save DataFrame to an Excel file
             processed_data.to_excel(output_file_path, index=False)
+
+            # Load the workbook and get the first sheet
+            workbook = openpyxl.load_workbook(output_file_path)
+            worksheet = workbook.active
+
+            # Freeze the top row
+            worksheet.freeze_panes = 'A2'  # This freezes the first row (Row 1)
+
+            # Apply wrap text to all cells and adjust vertical alignment
+            for row in worksheet.iter_rows():
+                for cell in row:
+                    cell.alignment = Alignment(wrap_text=True, vertical='top')
+
+            # Set all column widths to 30.00
+            for col in worksheet.columns:
+                worksheet.column_dimensions[get_column_letter(col[0].column)].width = 30
+
+            # Save the changes to the workbook
+            workbook.save(output_file_path)
+
             messagebox.showinfo("Success", f"Data processed successfully and saved to {output_file_path}.")
         else:
             messagebox.showwarning("Cancelled", "Save operation was cancelled.")
