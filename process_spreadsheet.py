@@ -103,7 +103,9 @@ class DataProcessorApp:
             self.root.after(0, lambda: self.update_progress(20))  # Update progress
 
             # Step 2: Drop unnecessary columns and rename 'number' to 'code'
-            columns_to_drop = ['unnamed: 0', 'unnamed: 10', 'helper column', 'section', 'status']
+            columns_to_drop = ['unnamed: 0', 'unnamed: 10', 'section', 'status']
+            if 'helper' in processed_data.columns:
+                columns_to_drop.append('helper')
             processed_data.drop(columns_to_drop, axis=1, inplace=True, errors='ignore')
             if 'number' in processed_data.columns:
                 processed_data.rename(columns={'number': 'code'}, inplace=True)
@@ -118,9 +120,11 @@ class DataProcessorApp:
 
             # Step 4: Process exact matches for 'ODE' and 'SBOE', skip if public_body is blank
             def update_columns(row):
-                if row['public_body'] and 'ODE' in row['public_body']:
+                # Only update 'N' values to 'ODE' or 'SBOE' if found in public_body
+                if (row['public_body'] and row['department of education'] == 'N' and
+                        re.search(r'\bODE\b', row['public_body'])):
                     row['department of education'] = 'ODE'
-                if row['public_body'] and 'SBOE' in row['public_body']:
+                if row['public_body'] and row['state board'] == 'N' and re.search(r'\bSBOE\b', row['public_body']):
                     row['state board'] = 'SBOE'
                 return row
 
